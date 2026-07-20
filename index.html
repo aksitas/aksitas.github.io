@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AKSITAS membantu profesional mengubah ide side hustle menjadi penawaran yang diluncurkan, diuji ke pasar, dan dibuktikan melalui sistem eksekusi 8 minggu.">
+  <meta name="theme-color" content="#101310">
+  <title>AKSITAS — Dari Niat Menjadi Bukti</title>
+  <style>
+    :root {
+      --ink: #111411;
+      --ink-2: #252a25;
+      --paper: #f4f1e8;
+      --paper-2: #ebe6d9;
+      --acid: #c9f04b;
+      --acid-dark: #79980d;
+      --white: #fffef9;
+      --muted: #62685f;
+      --line: rgba(17, 20, 17, .15);
+      --danger: #8f2f24;
+      --radius: 22px;
+      --shadow: 0 26px 80px rgba(22, 29, 19, .12);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button, .button { min-height: 48px; }
+    :focus-visible { outline: 3px solid var(--acid-dark); outline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; top: 8px; z-index: 999; background: var(--white); padding: 10px 14px; }
+    .skip-link:focus { left: 8px; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .eyebrow { margin: 0 0 14px; font-size: .78rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: inline-block; width: 26px; height: 3px; margin: 0 10px 3px 0; background: var(--acid); }
+    .section { padding: 98px 0; }
+    .section-head { max-width: 760px; margin-bottom: 48px; }
+    .section h2 { margin: 0 0 16px; font-size: clamp(2.1rem, 4.5vw, 4.1rem); line-height: 1.02; letter-spacing: -.055em; }
+    .section-head p { margin: 0; font-size: 1.08rem; color: var(--muted); }
+    .kicker { color: var(--acid-dark); font-weight: 800; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 21px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: var(--white); font-weight: 800; text-decoration: none; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.14); }
+    .button.acid { background: var(--acid); color: var(--ink); border-color: var(--acid); }
+    .button.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+    .micro { font-size: .78rem; color: var(--muted); }
+
+    .dev-notice { display: none; padding: 10px 20px; background: #fff1b8; color: #513b00; font-size: .84rem; text-align: center; }
+    .dev-notice.show { display: block; }
+    .nav-wrap { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: rgba(244,241,232,.9); backdrop-filter: blur(15px); }
+    nav { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 950; letter-spacing: .06em; text-decoration: none; }
+    .brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: var(--ink); color: var(--acid); font-size: .75rem; transform: rotate(-4deg); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links > a:not(.button) { font-size: .9rem; font-weight: 700; text-decoration: none; }
+    .menu-button { display: none; border: 0; background: transparent; font-weight: 850; }
+
+    .hero { position: relative; overflow: hidden; padding: 92px 0 64px; background: var(--ink); color: var(--white); }
+    .hero::after { content: ""; position: absolute; width: 560px; height: 560px; right: -180px; top: -210px; border-radius: 50%; background: radial-gradient(circle, rgba(201,240,75,.3), transparent 67%); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.3fr .7fr; gap: 74px; align-items: center; }
+    .hero h1 { max-width: 850px; margin: 0 0 24px; font-size: clamp(3.1rem, 7.2vw, 7.2rem); line-height: .9; letter-spacing: -.075em; }
+    .hero h1 span { color: var(--acid); }
+    .hero-copy { max-width: 690px; margin: 0 0 30px; color: #cdd3c8; font-size: clamp(1.06rem, 1.7vw, 1.3rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .hero .button.ghost { color: var(--white); border-color: rgba(255,255,255,.24); }
+    .hero-note { margin-top: 14px; color: #9fa99a; }
+    .score-card { position: relative; padding: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); background: rgba(255,255,255,.065); box-shadow: var(--shadow); }
+    .score-card::before { content: "FOUNDING COHORT"; position: absolute; right: 20px; top: -12px; padding: 5px 10px; border-radius: 99px; background: var(--acid); color: var(--ink); font-size: .65rem; font-weight: 900; letter-spacing: .1em; }
+    .score-card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .score-card > p { margin: 0 0 25px; color: #aeb7aa; font-size: .9rem; }
+    .meter { display: grid; gap: 15px; }
+    .meter-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .meter-row strong { font-size: 1.7rem; color: var(--acid); line-height: 1; }
+    .meter-row span { color: #cbd1c7; font-size: .86rem; }
+
+    .proof-strip { background: var(--acid); }
+    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .proof-item { padding: 25px 22px; border-right: 1px solid rgba(17,20,17,.18); }
+    .proof-item:last-child { border: 0; }
+    .proof-item b { display: block; font-size: 1.55rem; line-height: 1; }
+    .proof-item span { font-size: .78rem; font-weight: 750; }
+
+    .problem-grid, .fit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .panel { padding: 32px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.34); }
+    .panel.dark { background: var(--ink); color: var(--white); }
+    .panel h3 { margin: 0 0 16px; font-size: 1.35rem; }
+    .clean-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 13px; }
+    .clean-list li { position: relative; padding-left: 28px; }
+    .clean-list li::before { content: "→"; position: absolute; left: 0; color: var(--acid-dark); font-weight: 900; }
+    .dark .clean-list li::before { color: var(--acid); }
+
+    .method { background: var(--paper-2); }
+    .steps { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .step { min-height: 240px; padding: 26px 18px; border-right: 1px solid var(--line); }
+    .step:last-child { border-right: 0; }
+    .step-num { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-bottom: 48px; border-radius: 50%; background: var(--ink); color: var(--acid); font-size: .76rem; font-weight: 900; }
+    .step h3 { margin: 0 0 8px; font-size: 1.18rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+    .offer-card { position: relative; display: flex; flex-direction: column; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .offer-card.featured { background: var(--ink); color: var(--white); transform: translateY(-12px); }
+    .offer-tag { align-self: flex-start; padding: 6px 10px; border-radius: 99px; background: var(--paper-2); color: var(--ink); font-size: .69rem; font-weight: 900; letter-spacing: .08em; }
+    .featured .offer-tag { background: var(--acid); }
+    .offer-card h3 { margin: 22px 0 4px; font-size: 1.55rem; }
+    .offer-card .for { min-height: 48px; margin: 0; color: var(--muted); font-size: .9rem; }
+    .featured .for, .featured .micro { color: #adb6a9; }
+    .price { margin: 24px 0 18px; font-size: 2.15rem; line-height: 1; font-weight: 950; letter-spacing: -.04em; }
+    .price small { display: block; margin-top: 8px; font-size: .78rem; font-weight: 650; letter-spacing: 0; color: var(--muted); }
+    .featured .price small { color: #adb6a9; }
+    .offer-card ul { flex: 1; list-style: none; padding: 0; margin: 0 0 28px; display: grid; align-content: start; gap: 10px; font-size: .9rem; }
+    .offer-card li::before { content: "✓"; margin-right: 9px; color: var(--acid-dark); font-weight: 950; }
+    .featured li::before { color: var(--acid); }
+    .offer-card .button { width: 100%; }
+    .featured .button { background: var(--acid); border-color: var(--acid); color: var(--ink); }
+
+    .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .phase { padding: 24px; border-radius: 18px; background: var(--white); border: 1px solid var(--line); }
+    .phase span { color: var(--acid-dark); font-weight: 900; font-size: .78rem; }
+    .phase h3 { margin: 18px 0 8px; }
+    .phase p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .honesty { background: var(--ink); color: var(--white); }
+    .honesty-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: start; }
+    .honesty h2 { color: var(--acid); }
+    .honesty p { color: #b8c0b4; }
+    .metrics-box { padding: 28px; border: 1px solid rgba(255,255,255,.15); border-radius: var(--radius); background: rgba(255,255,255,.04); }
+    .metrics-box h3 { margin-top: 0; }
+    .metric-list { display: grid; gap: 12px; }
+    .metric-list div { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .metric-list span { color: #aab3a6; }
+    .metric-list b { color: var(--acid); text-align: right; }
+
+    .science-card { padding: 34px; border-left: 6px solid var(--acid-dark); background: var(--white); box-shadow: var(--shadow); }
+    .science-card blockquote { margin: 0 0 14px; font-size: clamp(1.35rem, 2.5vw, 2.05rem); line-height: 1.25; font-weight: 800; letter-spacing: -.025em; }
+    .science-card p { margin: 0; color: var(--muted); }
+
+    .faq { background: var(--paper-2); }
+    .faq-list { border-top: 1px solid var(--line); }
+    details { border-bottom: 1px solid var(--line); }
+    summary { padding: 22px 4px; cursor: pointer; font-weight: 850; list-style: none; display: flex; justify-content: space-between; gap: 24px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--acid-dark); font-size: 1.4rem; }
+    details[open] summary::after { content: "−"; }
+    details p { max-width: 790px; margin: 0; padding: 0 4px 23px; color: var(--muted); }
+
+    .apply { background: var(--acid); }
+    .apply-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 70px; align-items: start; }
+    .apply h2 { font-size: clamp(2.5rem, 5vw, 5rem); }
+    .form-card { padding: 30px; border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
+    form { display: grid; gap: 17px; }
+    .field { display: grid; gap: 7px; }
+    label { font-size: .82rem; font-weight: 850; }
+    input, select, textarea { width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fbfaf5; color: var(--ink); }
+    textarea { min-height: 110px; resize: vertical; }
+    .form-result { display: none; margin-top: 18px; padding: 16px; border-radius: 12px; background: var(--paper); }
+    .form-result.show { display: block; }
+    .form-result p { margin: 0 0 10px; }
+    .form-result .button { margin-right: 8px; margin-top: 8px; }
+
+    footer { padding: 40px 0; background: var(--ink); color: var(--white); }
+    .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    footer p { margin: 0; color: #aab3a6; font-size: .82rem; }
+    .footer-links { display: flex; gap: 18px; font-size: .82rem; }
+    .footer-links a { color: #cbd1c7; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; padding: 22px; flex-direction: column; align-items: stretch; background: var(--paper); border-bottom: 1px solid var(--line); }
+      .nav-links.open { display: flex; }
+      .menu-button { display: block; }
+      .hero-grid, .honesty-grid, .apply-grid { grid-template-columns: 1fr; gap: 40px; }
+      .score-card { max-width: 570px; }
+      .proof-grid { grid-template-columns: repeat(2, 1fr); }
+      .proof-item:nth-child(2) { border-right: 0; }
+      .proof-item:nth-child(-n+2) { border-bottom: 1px solid rgba(17,20,17,.18); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .step { border-bottom: 1px solid var(--line); }
+      .offers-grid { grid-template-columns: 1fr; }
+      .offer-card.featured { transform: none; }
+      .timeline { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .section { padding: 72px 0; }
+      .hero { padding-top: 66px; }
+      .hero h1 { font-size: clamp(3.1rem, 16vw, 5rem); }
+      .problem-grid, .fit-grid, .timeline, .steps { grid-template-columns: 1fr; }
+      .step { min-height: auto; }
+      .step-num { margin-bottom: 22px; }
+      .proof-item { padding: 20px 14px; }
+      .hero-actions, .hero-actions .button { width: 100%; }
+      .footer-grid { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+  <div class="dev-notice" id="devNotice">Mode pratinjau: masukkan nomor WhatsApp AKSITAS pada bagian CONFIG sebelum website dipublikasikan.</div>
+
+  <header class="nav-wrap">
+    <nav class="container" aria-label="Navigasi utama">
+      <a class="brand" href="#top" aria-label="AKSITAS, kembali ke atas">
+        <span class="brand-mark">A</span><span>AKSITAS</span>
+      </a>
+      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#metode">Metode</a>
+        <a href="#program">Program</a>
+        <a href="#cocok">Kecocokan</a>
+        <a href="#faq">FAQ</a>
+        <a class="button" href="#apply">Ajukan Action Audit</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Execution program untuk profesional</p>
+          <h1>Sudah tahu harus mulai. Sekarang <span>buktikan.</span></h1>
+          <p class="hero-copy">AKSITAS membantu Anda mengubah satu ide side hustle menjadi penawaran yang diluncurkan dan diuji ke pasar—melalui delapan minggu struktur, bukti kerja, umpan balik, dan akuntabilitas.</p>
+          <div class="hero-actions">
+            <a class="button acid" href="#apply">Ajukan Action Audit <span aria-hidden="true">↗</span></a>
+            <a class="button ghost" href="#program">Lihat struktur program</a>
+          </div>
+          <p class="micro hero-note">Bukan terapi, bukan kelas motivasi, dan tidak menjanjikan pendapatan tertentu.</p>
+        </div>
+        <aside class="score-card" aria-label="Struktur AKSITAS Sprint">
+          <h3>AKSITAS Sprint</h3>
+          <p>Satu target. Satu sistem. Bukti setiap minggu.</p>
+          <div class="meter">
+            <div class="meter-row"><span>Durasi terstruktur</span><strong>8 minggu</strong></div>
+            <div class="meter-row"><span>Percakapan pasar</span><strong>15–20</strong></div>
+            <div class="meter-row"><span>Target utama</span><strong>1</strong></div>
+            <div class="meter-row"><span>Review progres</span><strong>Mingguan</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="proof-strip" aria-label="Ringkasan program">
+      <div class="container proof-grid">
+        <div class="proof-item"><b>01</b><span>Tujuan prioritas</span></div>
+        <div class="proof-item"><b>08</b><span>Sesi kelompok</span></div>
+        <div class="proof-item"><b>2×</b><span>Office hours</span></div>
+        <div class="proof-item"><b>30</b><span>Hari rencana lanjutan</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Masalah yang sebenarnya</p>
+          <h2>Masalahnya bukan kurang insight.</h2>
+          <p>Anda mungkin sudah membaca buku, mengikuti webinar, menyimpan konten, dan membuat rencana. Namun ide belum diuji, penawaran belum diluncurkan, dan tidak ada bukti pasar.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="panel">
+            <h3>Yang biasanya terjadi</h3>
+            <ul class="clean-list">
+              <li>Terlalu banyak tujuan dikerjakan bersamaan.</li>
+              <li>Rencana berhenti pada daftar tugas yang panjang.</li>
+              <li>Belajar terasa produktif, tetapi pasar tidak pernah disentuh.</li>
+              <li>Tidak ada konsekuensi ketika tenggat terlewat.</li>
+              <li>Progres diukur dari kesibukan, bukan bukti.</li>
+            </ul>
+          </article>
+          <article class="panel dark">
+            <h3>Yang AKSITAS ubah</h3>
+            <ul class="clean-list">
+              <li>Satu tujuan dipilih untuk satu siklus.</li>
+              <li>Strategi dipecah menjadi tindakan mingguan.</li>
+              <li>Setiap tindakan memiliki waktu, pemicu, dan bukti.</li>
+              <li>Pasar disentuh sejak awal, bukan setelah semuanya sempurna.</li>
+              <li>Kegagalan dibedah sebagai masalah sistem, bukan harga diri.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method" id="metode">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">AKSITAS Execution System</p>
+          <h2>Lima tahap dari niat menuju bukti.</h2>
+          <p>Metode ini tidak menambah tumpukan teori. Ia mengurangi pilihan, memperjelas tindakan, dan memaksa pembelajaran terjadi lewat kontak dengan kenyataan.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><span class="step-num">01</span><h3>Bidik</h3><p>Pilih satu hasil yang penting, spesifik, dan realistis untuk satu siklus.</p></article>
+          <article class="step"><span class="step-num">02</span><h3>Bagi</h3><p>Pecah target menjadi milestone, eksperimen, dan tindakan terkecil.</p></article>
+          <article class="step"><span class="step-num">03</span><h3>Blok</h3><p>Kunci tindakan ke kalender serta buat rencana “jika–maka”.</p></article>
+          <article class="step"><span class="step-num">04</span><h3>Buktikan</h3><p>Unggah bukti kerja dan ukur tindakan yang benar-benar dilakukan.</p></article>
+          <article class="step"><span class="step-num">05</span><h3>Bedah</h3><p>Tinjau hasil, temukan bottleneck, lalu sesuaikan sistem berikutnya.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Tiga cara bekerja bersama</p>
+          <h2>Masuk sesuai tahap Anda.</h2>
+          <p>Harga dibedakan berdasarkan kompleksitas dan kedalaman pendampingan, bukan berdasarkan penghasilan yang kami tebak.</p>
+        </div>
+        <div class="offers-grid">
+          <article class="offer-card">
+            <span class="offer-tag">DIAGNOSTIC</span>
+            <h3>Action Audit</h3>
+            <p class="for">Untuk Anda yang punya ide, tetapi belum tahu bottleneck dan langkah prioritasnya.</p>
+            <div class="price">Rp750 ribu<small>mulai dari · 5–7 hari kerja</small></div>
+            <ul>
+              <li>Asesmen kesiapan</li>
+              <li>Sesi diagnosis 75–90 menit</li>
+              <li>Execution Score</li>
+              <li>Action Map 30 hari</li>
+              <li>Follow-up 20 menit</li>
+            </ul>
+            <a class="button ghost" href="#apply" data-offer="Action Audit">Mulai dari audit</a>
+          </article>
+          <article class="offer-card featured">
+            <span class="offer-tag">PROGRAM UTAMA</span>
+            <h3>AKSITAS Sprint</h3>
+            <p class="for">Untuk profesional yang siap meluncurkan dan menguji satu penawaran side hustle.</p>
+            <div class="price">Rp3,5 juta<small>mulai dari · program 8 minggu</small></div>
+            <ul>
+              <li>8 sesi kelompok</li>
+              <li>2 group office hours</li>
+              <li>Dashboard bukti kerja</li>
+              <li>15–20 kontak pasar</li>
+              <li>Rencana lanjutan 30 hari</li>
+            </ul>
+            <a class="button" href="#apply" data-offer="AKSITAS Sprint">Ajukan untuk cohort</a>
+          </article>
+          <article class="offer-card">
+            <span class="offer-tag">FRACTIONAL</span>
+            <h3>Execution Partner</h3>
+            <p class="for">Untuk expert atau bisnis kecil dengan pendapatan dan tim yang sudah berjalan.</p>
+            <div class="price">Rp12,5 juta<small>mulai per bulan · minimum 3 bulan</small></div>
+            <ul>
+              <li>Execution charter kuartalan</li>
+              <li>Sprint dua mingguan</li>
+              <li>Dashboard dan decision log</li>
+              <li>Weekly leadership review</li>
+              <li>Handover sistem</li>
+            </ul>
+            <a class="button ghost" href="#apply" data-offer="Execution Partner">Diskusikan kemitraan</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method" aria-labelledby="journey-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Perjalanan Sprint</p>
+          <h2 id="journey-title">Delapan minggu yang berakhir pada pasar, bukan slide.</h2>
+        </div>
+        <div class="timeline">
+          <article class="phase"><span>MINGGU 1–2</span><h3>Fokus</h3><p>Pilih target, pelanggan prioritas, dan bentuk penawaran minimum.</p></article>
+          <article class="phase"><span>MINGGU 3–4</span><h3>Kontak</h3><p>Wawancara pasar, outreach, dan uji asumsi sebelum membangun terlalu jauh.</p></article>
+          <article class="phase"><span>MINGGU 5–6</span><h3>Luncurkan</h3><p>Tawarkan solusi, catat keberatan, dan kumpulkan bukti respons pasar.</p></article>
+          <article class="phase"><span>MINGGU 7–8</span><h3>Perbaiki</h3><p>Evaluasi data, perbaiki penawaran, dan bangun ritme 30 hari berikutnya.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cocok">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Seleksi peserta</p>
+          <h2>Tidak semua orang perlu ikut.</h2>
+          <p>Program ini memberi dampak terbaik ketika niat sudah ada dan hambatannya berada pada pelaksanaan.</p>
+        </div>
+        <div class="fit-grid">
+          <article class="panel dark">
+            <h3>Program ini cocok jika Anda…</h3>
+            <ul class="clean-list">
+              <li>Memiliki keahlian atau ide yang dapat ditawarkan.</li>
+              <li>Bersedia menyediakan 5–7 jam setiap minggu.</li>
+              <li>Mau berbicara dengan calon pelanggan.</li>
+              <li>Bersedia menunjukkan bukti kerja secara jujur.</li>
+              <li>Menerima bahwa hasil pasar tidak dapat dijamin.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h3>Program ini tidak cocok jika Anda…</h3>
+            <ul class="clean-list">
+              <li>Mencari motivasi sesaat tanpa pekerjaan lapangan.</li>
+              <li>Menginginkan bisnis dibangun sepenuhnya oleh coach.</li>
+              <li>Tidak dapat menyediakan waktu eksekusi.</li>
+              <li>Menolak menjual atau berbicara dengan pasar.</li>
+              <li>Membutuhkan terapi, nasihat medis, atau investasi.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section honesty">
+      <div class="container honesty-grid">
+        <div>
+          <p class="eyebrow">Kejujuran sebelum bukti</p>
+          <h2>Kami belum akan mengarang testimoni.</h2>
+          <p>AKSITAS sedang membuka Founding Cohort. Karena belum ada data alumni, halaman ini tidak menampilkan angka keberhasilan atau kisah sukses yang belum diverifikasi.</p>
+          <p>Setelah cohort selesai, hasil akan dilaporkan dengan denominator, periode pengukuran, dan batasan yang jelas.</p>
+        </div>
+        <div class="metrics-box">
+          <h3>Metrik yang akan dipublikasikan</h3>
+          <div class="metric-list">
+            <div><span>Penyelesaian program</span><b>Peserta selesai / peserta mulai</b></div>
+            <div><span>Kepatuhan tindakan</span><b>Bukti selesai / komitmen dibuat</b></div>
+            <div><span>Peluncuran penawaran</span><b>Jumlah dan persentase peserta</b></div>
+            <div><span>Percakapan pasar</span><b>Median per peserta</b></div>
+            <div><span>Pelanggan pertama</span><b>Jika terjadi, tanpa menjamin</b></div>
+            <div><span>Retensi perilaku</span><b>Follow-up 30 dan 90 hari</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="science-card">
+          <p class="eyebrow">Basis perilaku</p>
+          <blockquote>Rencana “jika–maka” membantu menjembatani niat dan tindakan—terutama ketika niatnya kuat dan hambatan eksekusinya nyata.</blockquote>
+          <p>AKSITAS menggunakan perencanaan tindakan, pemicu situasional, review mingguan, serta bukti kerja. Bukti ilmiah mendukung mekanisme tersebut, tetapi tidak menjamin hasil bisnis individu. <a href="https://cancercontrol.cancer.gov/brp/research/constructs/implementation-intentions" target="_blank" rel="noopener">Baca ringkasan National Cancer Institute ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Pertanyaan umum</p>
+          <h2>Sebelum Anda mengajukan.</h2>
+        </div>
+        <div class="faq-list">
+          <details><summary>Apakah AKSITAS menjamin saya mendapatkan pelanggan?</summary><p>Tidak. AKSITAS menjamin struktur layanan yang dijelaskan—sesi, alat kerja, review, dan pendampingan. Respons pasar dipengaruhi penawaran, pelaksanaan, harga, kebutuhan pelanggan, serta faktor lain yang tidak dapat kami kendalikan.</p></details>
+          <details><summary>Saya belum mempunyai ide side hustle. Apakah bisa ikut Sprint?</summary><p>Belum tentu. Mulailah dari Action Audit. Sprint dirancang untuk peserta yang setidaknya mempunyai keahlian, masalah yang ingin diselesaikan, atau beberapa opsi ide yang dapat diseleksi dengan cepat.</p></details>
+          <details><summary>Berapa waktu yang perlu saya sediakan?</summary><p>Sediakan 5–7 jam per minggu, termasuk sesi kelompok. Jika kapasitas aktual Anda di bawah itu, lebih baik menunda daripada membayar program yang tidak sempat dijalankan.</p></details>
+          <details><summary>Apa perbedaan Core dan Pro?</summary><p>Core berfokus pada sesi cohort dan office hours. Pro menambahkan dua sesi individual untuk masalah positioning, penawaran, atau hambatan eksekusi yang membutuhkan perhatian lebih dalam.</p></details>
+          <details><summary>Apakah ini layanan terapi atau konsultasi keuangan?</summary><p>Bukan. AKSITAS tidak menggantikan psikolog, dokter, ahli gizi, penasihat keuangan, konsultan hukum, atau profesional berlisensi lainnya.</p></details>
+          <details><summary>Apa yang terjadi setelah mengisi aplikasi?</summary><p>Aplikasi ditinjau untuk menilai kesiapan, kecocokan, dan produk yang tepat. Anda dapat direkomendasikan mengikuti Action Audit, Sprint, Execution Partner, menjalankan rencana mandiri, atau menunda program.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section apply" id="apply">
+      <div class="container apply-grid">
+        <div>
+          <p class="eyebrow">Langkah berikutnya</p>
+          <h2>Mulai dengan diagnosis, bukan asumsi.</h2>
+          <p>Isi aplikasi singkat. Jawaban Anda akan disusun menjadi pesan WhatsApp agar proses awal tetap sederhana dan personal.</p>
+          <p class="micro">Tidak semua aplikasi akan diarahkan ke produk termahal. Rekomendasi didasarkan pada kesiapan dan kompleksitas masalah.</p>
+        </div>
+        <div class="form-card">
+          <form id="applicationForm">
+            <div class="field"><label for="name">Nama lengkap</label><input id="name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="role">Pekerjaan atau bisnis saat ini</label><input id="role" name="role" required></div>
+            <div class="field"><label for="offerSelect">Layanan yang diminati</label><select id="offerSelect" name="offer"><option>Belum yakin — minta rekomendasi</option><option>Action Audit</option><option>AKSITAS Sprint</option><option>Execution Partner</option></select></div>
+            <div class="field"><label for="goal">Hasil yang ingin dicapai dalam 8–12 minggu</label><textarea id="goal" name="goal" required></textarea></div>
+            <div class="field"><label for="barrier">Hambatan terbesar saat ini</label><textarea id="barrier" name="barrier" required></textarea></div>
+            <div class="field"><label for="capacity">Kapasitas waktu per minggu</label><select id="capacity" name="capacity" required><option value="">Pilih</option><option>Kurang dari 3 jam</option><option>3–4 jam</option><option>5–7 jam</option><option>Lebih dari 7 jam</option></select></div>
+            <button class="button" type="submit">Susun aplikasi saya <span aria-hidden="true">→</span></button>
+            <p class="micro">Dengan melanjutkan, Anda menyetujui bahwa informasi ini digunakan untuk menilai kecocokan layanan.</p>
+          </form>
+          <div class="form-result" id="formResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div><a class="brand" href="#top"><span class="brand-mark">A</span><span>AKSITAS</span></a><p>Dari Niat Menjadi Bukti.</p></div>
+      <div class="footer-links"><a href="#program">Program</a><a href="#faq">FAQ</a><a href="#apply">Kontak</a></div>
+      <p>© <span id="year"></span> AKSITAS. Hasil bergantung pada konteks dan pelaksanaan.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* CONFIG: ganti nomor di bawah ini sebelum website dipublikasikan. Format: 628xxxxxxxxxx tanpa tanda + */
+    const CONFIG = {
+      whatsappNumber: "",
+      cohortLabel: "Founding Cohort AKSITAS Sprint"
+    };
+
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    menuButton.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }));
+
+    document.querySelectorAll("[data-offer]").forEach(button => {
+      button.addEventListener("click", () => {
+        document.getElementById("offerSelect").value = button.dataset.offer;
+      });
+    });
+
+    const form = document.getElementById("applicationForm");
+    const result = document.getElementById("formResult");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const message = [
+        `Halo AKSITAS, saya ingin mengajukan aplikasi untuk ${data.offer}.`,
+        "",
+        `Nama: ${data.name}`,
+        `Pekerjaan/bisnis: ${data.role}`,
+        `Target 8–12 minggu: ${data.goal}`,
+        `Hambatan terbesar: ${data.barrier}`,
+        `Kapasitas waktu: ${data.capacity}`,
+        "",
+        "Mohon rekomendasikan langkah yang paling sesuai."
+      ].join("\n");
+
+      result.classList.add("show");
+      if (CONFIG.whatsappNumber) {
+        const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+        result.innerHTML = `<p><strong>Aplikasi siap.</strong> Klik tombol berikut untuk mengirimkannya melalui WhatsApp.</p><a class="button" href="${url}" target="_blank" rel="noopener">Kirim ke WhatsApp</a>`;
+      } else {
+        try { await navigator.clipboard.writeText(message); } catch (_) {}
+        result.innerHTML = `<p><strong>Aplikasi sudah disusun dan dicoba disalin.</strong> Nomor WhatsApp belum dikonfigurasi pada website ini. Simpan teks di bawah, lalu kirim ke kanal resmi AKSITAS.</p><textarea aria-label="Teks aplikasi" readonly>${message.replace(/</g, "&lt;")}</textarea><button class="button" type="button" id="copyApplication">Salin aplikasi</button>`;
+        document.getElementById("copyApplication").addEventListener("click", async () => {
+          await navigator.clipboard.writeText(message);
+          document.getElementById("copyApplication").textContent = "Tersalin ✓";
+        });
+      }
+    });
+
+    if (!CONFIG.whatsappNumber) document.getElementById("devNotice").classList.add("show");
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
